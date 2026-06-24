@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Oshi ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=80")
+    center/cover no-repeat;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    width:90%;
+    max-width:750px;
+    padding:50px;
+    border-radius:25px;
+    text-align:center;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.2);
+    color:white;
+}
+
+h1{font-size:3rem;}
+h2{font-weight:300;line-height:1.8;}
+
+button{
+    border:none;
+    cursor:pointer;
+    padding:14px 32px;
+    margin:10px;
+    border-radius:999px;
+    font-size:18px;
+    font-weight:600;
+    color:white;
+    background:linear-gradient(135deg,#ff4d9d,#ff7bbf);
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.07);
+}
+
+.hidden{display:none;}
+
+#buttonArea{
+    position:relative;
+    height:160px;
+    margin-top:30px;
+}
+
+#noBtn{
+    position:absolute;
+    left:260px;
+    top:40px;
+    background:#333;
+    transition:0.2s;
+}
+
+#msg{
+    margin-top:20px;
+    font-size:20px;
+    color:#ffd1e8;
+}
+
+/* HEARTS */
+.heart{
+    position:fixed;
+    color:white;
+    opacity:0.3;
+    animation:float 8s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes float{
+    from{transform:translateY(110vh);}
+    to{transform:translateY(-120px);}
+}
+
+/* CONFETTI */
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 LOCAL MUSIC FILE -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<div class="container">
+
+<!-- PAGE 1 -->
+<div id="page1">
+
+    <h1>❤️ Hey Oshi I love you so much ❤️</h1>
+
+    <h2>
+        wanna fuck meeeee? 🥺❤️
+    </h2>
+
+    <div id="buttonArea">
+
+        <button id="yesBtn" onclick="sayYes()">YES ❤️</button>
+        <button id="noBtn">NO 😅</button>
+
+    </div>
+
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="hidden">
+
+    <h1>🎉 YAYYYY 🎉</h1>
+
+    <h2>Now choose what do I get  😋</h2>
+
+    <button onclick="food('Pizza')">show me everything</button>
+    <button onclick="food('Burger')"> boobies</button>
+    <button onclick="food('Noodles')"> butty </button>
+    <button onclick="food('Tacos')">🐱 kitty</button>
+
+    <div id="msg"></div>
+
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="hidden">
+
+    <h1>❤️ CONFIRMED ❤️</h1>
+
+    <h2>
+        👧 Oshi ❤️<br>
+        👦 Seniru ❤️<br><br>
+
+        show me everything<br><br>
+
+        Let’s make memories ❤️
+    </h2>
+
+</div>
+
+</div>
+
+<script>
+
+/* HEARTS */
+for(let i=0;i<20;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(15+Math.random()*20)+"px";
+    h.style.animationDuration=(6+Math.random()*10)+"s";
+    document.body.appendChild(h);
+}
+
+/* NO BUTTON MOVE */
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+
+let scale=1;
+
+document.addEventListener("mousemove",(e)=>{
+
+    const r=noBtn.getBoundingClientRect();
+
+    const dx=e.clientX-(r.left+r.width/2);
+    const dy=e.clientY-(r.top+r.height/2);
+
+    const dist=Math.sqrt(dx*dx+dy*dy);
+
+    if(dist<140){
+
+        let moveX=dx>0?-160:160;
+        let moveY=dy>0?-100:100;
+
+        let x=r.left+moveX;
+        let y=r.top+moveY;
+
+        x=Math.max(20,Math.min(window.innerWidth-120,x));
+        y=Math.max(20,Math.min(window.innerHeight-80,y));
+
+        noBtn.style.position="fixed";
+        noBtn.style.left=x+"px";
+        noBtn.style.top=y+"px";
+
+        scale+=0.1;
+        yesBtn.style.transform=`scale(${scale})`;
+
+        const texts=[
+            "YES ❤️",
+            "YESSS ❤️❤️",
+            "PLEASE 🥺❤️",
+            "SAY YES 😭❤️",
+            "YOU KNOW YOU WANT TO ❤️"
+        ];
+
+        yesBtn.innerHTML=texts[Math.min(Math.floor(scale),texts.length-1)];
+    }
+});
+
+/* YES + MUSIC START */
+function sayYes(){
+
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+
+    const music=document.getElementById("bgMusic");
+    music.volume = 0.6;
+
+    music.play().catch(()=> {
+        console.log("User must interact first for audio autoplay.");
+    });
+
+    confetti();
+}
+
+/* FOOD */
+function food(choice){
+
+    const msg=document.getElementById("msg");
+
+    if(choice==="Pizza"){
+        msg.innerHTML=" Perfect ❤️";
+        setTimeout(()=>{
+            document.getElementById("page2").classList.add("hidden");
+            document.getElementById("page3").classList.remove("hidden");
+        },1200);
+    }
+    else{
+        msg.innerHTML="❌ you have to show me everything ❤️";
+    }
+}
+
+/* CONFETTI */
+function confetti(){
+    for(let i=0;i<100;i++){
+        let c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+        c.style.animationDuration=(2+Math.random()*3)+"s";
+        document.body.appendChild(c);
+
+        setTimeout(()=>c.remove(),5000);
+    }
+}
+
+</script>
+
+</body>
+</html>
